@@ -112,21 +112,3 @@ class BPETokenizer:
         text_bytes = b''.join(byte_list)
         text = text_bytes.decode('utf-8', errors='replace')  # Decode with error handling
         return text
-
-# 事前トークン化対応のBPE学習
-sample_text = "Say hello! Why hello? Just hello.<|endoftext|>Good morning!"
-
-merge_rules = train_bpe(sample_text, vocab_size=270)
-tokenizer = BPETokenizer(merge_rules)
-
-# エンコード/デコード
-text = "Say hello!"
-ids = tokenizer.encode(text)
-decoded = tokenizer.decode(ids)
-
-print(ids)
-print(decoded)
-
-# 各トークンIDをデコードして確認
-for token_id in ids:
-    print(f"{token_id} -> '{tokenizer.decode([token_id])}'")
